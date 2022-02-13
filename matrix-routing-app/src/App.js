@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
 import * as tt from '@tomtom-international/web-sdk-maps';
 import * as ttapi from '@tomtom-international/web-sdk-services';
@@ -45,7 +44,7 @@ const App = () => {
   const addDeliveryMarker = (lngLat, map) => {
     const element = document.createElement('div')
     element.className = 'marker-delivery'
-    tt.Marker({
+    new tt.Marker({
       element: element
     })
     .setLngLat(lngLat)
@@ -57,8 +56,10 @@ const App = () => {
       lng: longitude,
       lat: latitude,
     }
+    const destinations = []
+
     const map = tt.map({
-      key: USE_THE_KEY,
+      key: 'S2akAYG2LGpK6BxMN9vGivA4njK2pKva',
       container: mapElement.current,
       stylesVisibility: {
         trafficIncidents: true,
@@ -107,9 +108,9 @@ const App = () => {
       })
 
     const callParameters = {
-      key: USE_THE_KEY,
+      key: 'S2akAYG2LGpK6BxMN9vGivA4njK2pKva',
       destinations: pointsForDestinations,
-      origins: [convertToPoints(origin)],
+      origin: [convertToPoints(origin)],
      }
 
      return new Promise((resolve, reject) => {
@@ -141,7 +142,7 @@ const App = () => {
 
       ttapi.services
         .calculateRoute({
-          key: USE_THE_KEY,
+          key: 'S2akAYG2LGpK6BxMN9vGivA4njK2pKva',
           locations: sorted,
         })
         .then((routeData) => {
@@ -162,7 +163,7 @@ const App = () => {
   return (
     <>
       {map && (
-        <div className="App">
+        <div className="app">
           <div ref={mapElement} className="map" />
           <div className="search-bar">
             <h1>Where to?</h1>
