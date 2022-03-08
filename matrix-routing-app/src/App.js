@@ -59,7 +59,7 @@ const App = () => {
     const destinations = []
 
     const map = tt.map({
-      key: 'S2akAYG2LGpK6BxMN9vGivA4njK2pKva',
+      key: process.env.REACT_APP_TOM_TOM_API_KEY,
       container: mapElement.current,
       stylesVisibility: {
         trafficIncidents: true,
@@ -108,7 +108,7 @@ const App = () => {
       })
 
     const callParameters = {
-      key: 'S2akAYG2LGpK6BxMN9vGivA4njK2pKva',
+      key: process.env.REACT_APP_TOM_TOM_API_KEY,
       destinations: pointsForDestinations,
       origin: [convertToPoints(origin)],
      }
@@ -121,7 +121,7 @@ const App = () => {
         const resultsArray = results.map((result, index) => {
           return {
             location: locations[index],
-            drivingtime: results.response.routeSummary.travelTimeInSeconds,
+            drivingtime: result.response.routeSummary.travelTimeInSeconds,
           }
         })
         resultsArray.sort((a,b) => {
@@ -142,7 +142,7 @@ const App = () => {
 
       ttapi.services
         .calculateRoute({
-          key: 'S2akAYG2LGpK6BxMN9vGivA4njK2pKva',
+          key: process.env.REACT_APP_TOM_TOM_API_KEY,
           locations: sorted,
         })
         .then((routeData) => {
